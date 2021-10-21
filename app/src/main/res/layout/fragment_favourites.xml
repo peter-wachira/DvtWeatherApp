@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,35 +10,49 @@
 
     <TextView
         android:id="@+id/textView"
-        style="@style/TextAppearance.MaterialComponents.Headline4"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
         android:fontFamily="@font/work_sans"
-        android:text="@string/favourites"
+        android:text="@string/favourite_location"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/error_textview"
-        android:layout_width="0dp"
-        android:visibility="gone"
+    <LinearLayout
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginEnd="17dp"
-        android:fontFamily="@font/work_sans"
-        android:gravity="center"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:text="@string/you_do_not_have_any_favourite_location_yet"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:tint="@color/black"
+            android:src="@drawable/sad_cloud"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginEnd="17dp"
+            android:fontFamily="@font/work_sans"
+            android:gravity="center"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="@string/you_do_not_have_any_favourite_location_yet"
+            android:textColor="@android:color/darker_gray" />
+
+
+    </LinearLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView

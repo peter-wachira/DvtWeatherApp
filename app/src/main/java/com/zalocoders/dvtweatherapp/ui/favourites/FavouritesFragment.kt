@@ -42,7 +42,7 @@ class FavouritesFragment : Fragment() {
                     }
                     favouriteLocationsAdapter.submitList(favouriteLocations)
                 }else{
-                    binding.errorTextview.show()
+                    binding.errorLayout.show()
                 }
             }
         }
