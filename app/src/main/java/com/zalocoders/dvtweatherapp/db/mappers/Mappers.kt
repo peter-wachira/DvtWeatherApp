@@ -6,9 +6,9 @@ import com.zalocoders.dvtweatherapp.data.ForeCast
 import com.zalocoders.dvtweatherapp.data.models.CurrentLocationWeatherResponse
 import com.zalocoders.dvtweatherapp.data.models.ForeCastResponse
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import kotlin.collections.ArrayList
-
 
 fun ForeCastResponse.toForeCastEntity(name: String): List<ForeCast> {
     val items: MutableList<ForeCast> = ArrayList()
@@ -45,23 +45,6 @@ fun CurrentLocationWeatherResponse.toCurrentWeatherEntity(locationName: String =
     )
 }
 
-
-fun CurrentLocationWeatherResponse.toFavouriteLocationEntity(locationName: String = ""): Favourite {
-    return Favourite(
-        name = if (name.trim().isNotEmpty()) locationName else name,
-        lat = coord.lat,
-        lng = coord.lon,
-        normalTemp = this.main.temp.toInt(),
-        highTemp = main.tempMax.toInt(),
-        lowTemp = main.tempMin.toInt(),
-        lastUpdated = System.currentTimeMillis(),
-        isCurrent = true,
-        weatherCondition = weather[0].id.toString(),
-        weatherConditionName = weather[0].description
-    )
-}
-
-
 fun CurrentWeather.toFavouriteLocationEntity(locationName: String = ""): Favourite {
     return Favourite(
         name = if (name.trim().isNotEmpty()) locationName else name,
@@ -78,7 +61,9 @@ fun CurrentWeather.toFavouriteLocationEntity(locationName: String = ""): Favouri
 }
 
 fun formatTime(currentTime: Long): String {
-    val epoch = currentTime * 1000
+    val epoch = currentTime * TIME_INTERVAL
     val dateFormat = SimpleDateFormat("EEEE", Locale.getDefault())
     return dateFormat.format(Date(epoch))
 }
+
+private const val TIME_INTERVAL = 1000L
