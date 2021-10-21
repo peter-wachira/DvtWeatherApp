@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
+    android:layout_margin="12dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    app:cardElevation="2dp"
-    android:layout_marginBottom="8dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_city_name"
@@ -23,6 +15,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toStartOf="@+id/tv_temp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,5 +45,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</com.google.android.material.card.MaterialCardView>
