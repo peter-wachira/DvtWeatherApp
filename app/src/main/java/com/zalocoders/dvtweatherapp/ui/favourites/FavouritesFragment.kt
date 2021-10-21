@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.zalocoders.dvtweatherapp.databinding.FragmentFavouritesBinding
+import com.zalocoders.dvtweatherapp.utils.hide
 import com.zalocoders.dvtweatherapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -15,11 +16,11 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 class FavouritesFragment : Fragment() {
 
-    private val binding:FragmentFavouritesBinding by lazy {
+    private val binding: FragmentFavouritesBinding by lazy {
         FragmentFavouritesBinding.inflate(layoutInflater)
     }
 
-    private val viewModel:FavouriteViewModel by viewModels()
+    private val viewModel: FavouriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,19 +32,21 @@ class FavouritesFragment : Fragment() {
         getAllFavouriteLocations()
     }
 
-    private fun getAllFavouriteLocations(){
+    private fun getAllFavouriteLocations() {
         val favouriteLocationsAdapter = FavouriteLocationsAdapter()
 
         lifecycleScope.launchWhenStarted {
             viewModel.getAllFavourites().collect { favouriteLocations ->
-                if(favouriteLocations.isNotEmpty()){
-                    with(binding.favouriteRecycler) {
-                        adapter = favouriteLocationsAdapter
-                    }
-                    favouriteLocationsAdapter.submitList(favouriteLocations)
-                }else{
+                if (favouriteLocations.isNotEmpty()) {
+                    binding.errorLayout.hide()
+                } else {
                     binding.errorLayout.show()
                 }
+
+                with(binding.favouriteRecycler) {
+                    adapter = favouriteLocationsAdapter
+                }
+                favouriteLocationsAdapter.submitList(favouriteLocations)
             }
         }
     }

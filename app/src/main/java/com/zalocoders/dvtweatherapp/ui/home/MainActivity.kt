@@ -342,13 +342,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openFavouritesFragment() {
-        if(fragment != null){
             val fragmentManager = supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(android.R.id.content, fragment!!)
+            fragmentTransaction.add(android.R.id.content, fragment!!)
             fragmentTransaction.addToBackStack("favourite_fragment")
             fragmentTransaction.commit()
-        }
     }
 
     override fun onBackPressed() {
