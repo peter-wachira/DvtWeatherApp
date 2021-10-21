@@ -9,14 +9,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Provides
     fun provideWeatherDatabase(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context,WeatherDatabase::class.java,"weather_db")
+        Room.databaseBuilder(context, WeatherDatabase::class.java, "weather_db")
             .fallbackToDestructiveMigration()
             .build()
 
@@ -25,5 +24,4 @@ object DatabaseModule {
 
     @Provides
     fun provideSavedLocationDao(weatherDatabase: WeatherDatabase) = weatherDatabase.savedLocationDao()
-
 }

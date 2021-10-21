@@ -24,6 +24,7 @@ import javax.inject.Singleton
 object NetworkModule {
 
     private var BASE_URL = "https://api.openweathermap.org/data/2.5/"
+    private const val TIME_OUT = 30
 
     @Provides
     @ApiKey
@@ -33,19 +34,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient(@ApiKey apiKey: String): OkHttpClient {
+    fun provideHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
+            .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
+            .writeTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
             .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
             .addInterceptor { chain ->
                 val request = chain.request()
                 val authRequest = request.newBuilder()
                     .header("Content-Type", "application/json")
                     .build()
-
-
                 return@addInterceptor chain.proceed(authRequest)
             }
             .addNetworkInterceptor(loggingInterceptor)
@@ -72,4 +71,6 @@ object NetworkModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class ApiKey
+
 }
+
