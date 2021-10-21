@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">DvtWeatherApp</string>
+    <string name="api_key" >42b537ded873abd22cf1c32219d08cf7</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="favourites">Favourites</string>
+    <string name="current">current</string>
+    <string name="max">max</string>
+    <string name="min">min</string>
+    <string name="favourites_fab">favourites_fab</string>
+    <string name="you_do_not_have_any_favourite_location_yet">You do not have any favourite location yet</string>
 </resources>

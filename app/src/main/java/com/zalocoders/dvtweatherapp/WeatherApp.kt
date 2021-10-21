@@ -1,5 +1,17 @@
 package com.zalocoders.dvtweatherapp
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
-class WeatherApp: Application()
+@HiltAndroidApp
+class WeatherApp: Application(){
+
+    override fun onCreate() {
+        super.onCreate()
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
+}
