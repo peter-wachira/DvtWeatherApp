@@ -14,7 +14,7 @@ class FavouriteLocationsAdapter :
         ListAdapter<Favourite, FavouriteLocationsAdapter.LocationViewHolder>(diffUtil) {
     inner class LocationViewHolder(private val binding: FavouriteItemLayoutBinding) :
             RecyclerView.ViewHolder(binding.root) {
-
+        
         @SuppressLint("SetTextI18n")
         fun bind(item: Favourite) {
             with(binding) {
@@ -24,28 +24,28 @@ class FavouriteLocationsAdapter :
             }
         }
     }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder =
             LocationViewHolder(
                     FavouriteItemLayoutBinding.inflate(
                             LayoutInflater.from(parent.context), parent, false
                     )
             )
-
+    
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
+    
 }
 
 val diffUtil = object : DiffUtil.ItemCallback<Favourite>() {
     override fun areItemsTheSame(oldItem: Favourite, newItem: Favourite): Boolean {
         return oldItem.lat == newItem.lat
     }
-
+    
     override fun areContentsTheSame(oldItem: Favourite, newItem: Favourite): Boolean {
         return oldItem == newItem
     }
-
-
+    
+    
 }

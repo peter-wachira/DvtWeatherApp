@@ -5,7 +5,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.dvtweatherapp.R
 
-
 fun View.show() {
     visibility = View.VISIBLE
 }
@@ -37,7 +36,6 @@ fun View.showRetrySnackBar(message: String, action: ((View) -> Unit)?) {
             dismiss()
             action?.invoke(this@showRetrySnackBar)
         }
-
         show()
     }
 }

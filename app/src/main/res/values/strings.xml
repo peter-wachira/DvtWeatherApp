@@ -11,4 +11,5 @@
     <string name="favourites_fab">favourites_fab</string>
     <string name="you_do_not_have_any_favourite_location_yet">You do not have any favourite locations</string>
     <string name="favourite_location">Favourite Locations</string>
+    <string name="fetching_weather_please_wait">please wait...</string>
 </resources>

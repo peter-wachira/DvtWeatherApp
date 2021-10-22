@@ -27,9 +27,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeRepository: HomeRepository,
-    private val client:FusedLocationProviderClient
-):ViewModel() {
+        private val homeRepository: HomeRepository,
+        private val client: FusedLocationProviderClient
+) : ViewModel() {
 
     private var _isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -46,29 +46,27 @@ class HomeViewModel @Inject constructor(
         _isLoading.value = false
     }
 
-     fun insertCurrentLocation(CurrentWeather: CurrentWeather) =
-        viewModelScope.launch(Dispatchers.IO) {
-            homeRepository.insertCurrentLocationWeather(CurrentWeather)
-        }
+    fun insertCurrentLocation(currentWeather: CurrentWeather) =
+            viewModelScope.launch(Dispatchers.IO) {
+                homeRepository.insertCurrentLocationWeather(currentWeather)
+            }
 
-     fun insertForeCast(foreCast: ForeCast) =
-        viewModelScope.launch(Dispatchers.IO) {
-            homeRepository.insertForeCast(foreCast)
-        }
+    fun insertForeCast(foreCast: ForeCast) =
+            viewModelScope.launch(Dispatchers.IO) {
+                homeRepository.insertForeCast(foreCast)
+            }
 
-     fun insertFavouriteWeatherLocation(favourite: Favourite) =
-        viewModelScope.launch(Dispatchers.IO) {
-            homeRepository.insertFavouriteWeatherLocation(favourite)
-        }
+    fun insertFavouriteWeatherLocation(favourite: Favourite) =
+            viewModelScope.launch(Dispatchers.IO) {
+                homeRepository.insertFavouriteWeatherLocation(favourite)
+            }
 
-     fun deleteFavouriteLocation(favourite: Favourite) =
-        viewModelScope.launch(Dispatchers.IO) {
-            homeRepository.deleteFavouriteLocation(favourite)
-        }
-
+    fun deleteFavouriteLocation(favourite: Favourite) =
+            viewModelScope.launch(Dispatchers.IO) {
+                homeRepository.deleteFavouriteLocation(favourite)
+            }
 
     fun getAllForeCasts() = homeRepository.getAllForeCasts()
-
     fun getCurrentWeather() = homeRepository.getCurrentWeather()
 
     @ExperimentalCoroutinesApi
@@ -89,7 +87,6 @@ class HomeViewModel @Inject constructor(
         }
         client.requestLocationUpdates(locationRequest, callBack, Looper.getMainLooper())
         awaitClose { client.removeLocationUpdates(callBack) }
-
     }
 
     companion object {

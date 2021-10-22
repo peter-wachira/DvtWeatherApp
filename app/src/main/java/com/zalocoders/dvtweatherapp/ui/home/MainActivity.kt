@@ -48,17 +48,16 @@ import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.dvtweatherapp.db.mappers.toFavouriteLocationEntity
 import com.zalocoders.dvtweatherapp.ui.favourites.FavouritesFragment
 
-
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
-    private val viewModel:HomeViewModel by viewModels()
-    private var fragment:FavouritesFragment? = null
+    private val viewModel: HomeViewModel by viewModels()
+    private var fragment: FavouritesFragment? = null
 
-    private lateinit var currentLocationWeather:CurrentWeather
-    private lateinit var currentLocationName:String
+    private lateinit var currentLocationWeather: CurrentWeather
+    private lateinit var currentLocationName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun getUserCurrentLocation(){
+    private fun getUserCurrentLocation() {
         lifecycleScope.launchWhenStarted {
             viewModel.getCurrentLocation().collect { lastLocation ->
 
@@ -97,18 +96,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getForecast(location: Location){
+    private fun getForecast(location: Location) {
         lifecycleScope.launchWhenStarted {
-            viewModel.getForecast(location).collect {response ->
-                when(response){
+            viewModel.getForecast(location).collect { response ->
+                when (response) {
                     is WeatherResult.Success -> {
-                        val data = response.data.toForeCastEntity(geoCodeLocation(location.latitude,location.longitude))
+                        val data = response.data.toForeCastEntity(geoCodeLocation(location.latitude, location.longitude))
 
-                        if(data.isNotEmpty()){
+                        if (data.isNotEmpty()) {
 
                             setUpRecyclerView(data)
 
-                            for(forecast in data){
+                            for (forecast in data) {
                                 viewModel.insertForeCast(forecast)
                             }
                         }
@@ -129,10 +128,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCurrentWeather(location: Location){
+    private fun getCurrentWeather(location: Location) {
         lifecycleScope.launchWhenStarted {
             viewModel.getCurrentWeather(location).collect { response ->
-                when(response){
+                when (response) {
                     is WeatherResult.Success -> {
                         val currentWeather = response.data.toCurrentWeatherEntity(response.data.name)
                         currentLocationWeather = currentWeather
@@ -145,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                         setUpCurrentWeatherViews(currentWeather)
                     }
                     is WeatherResult.ServerError -> {
-                        binding.root.showRetrySnackBar("An Error Occurred"){
+                        binding.root.showRetrySnackBar("An Error Occurred") {
                             checkForLocationPermission()
                         }
                     }
@@ -154,8 +153,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpCurrentWeatherViews(currentWeather: CurrentWeather){
-        with(binding){
+    private fun setUpCurrentWeatherViews(currentWeather: CurrentWeather) {
+        with(binding) {
             tvTemp.text = currentWeather.normalTemp.toString() + " \u2103"
             tvWeatherDesc.text = currentWeather.weatherConditionName.uppercase(Locale.getDefault())
             tvMaxTitle.text = currentWeather.highTemp.toString() + " \u2103"
@@ -163,11 +162,12 @@ class MainActivity : AppCompatActivity() {
             tvCurrentTitle.text = currentWeather.normalTemp.toString() + " \u2103"
         }
     }
-    private fun observeViewModel(){
-        viewModel.isLoading.observe(this@MainActivity,{
-            when(it){
+
+    private fun observeViewModel() {
+        viewModel.isLoading.observe(this@MainActivity, {
+            when (it) {
                 true -> {
-                binding.progressLayout.show()
+                    binding.progressLayout.show()
                 }
                 false -> {
                     binding.progressLayout.hide()
@@ -198,7 +198,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkForLocationPermission() {
         if (binding.root.context.isLocationPermissionEnabled()) {
-            if(binding.root.context.isUserLocationEnabled()) {
+            if (binding.root.context.isUserLocationEnabled()) {
                 getUserCurrentLocation()
             } else {
                 enableLocation()
@@ -210,23 +210,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestLocationPermission() {
         Dexter.withContext(binding.root.context)
-            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(ermissionGrantedResponse: PermissionGrantedResponse) {
-                    getUserCurrentLocation()
-                }
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(object : PermissionListener {
+                    override fun onPermissionGranted(ermissionGrantedResponse: PermissionGrantedResponse) {
+                        getUserCurrentLocation()
+                    }
 
-                override fun onPermissionDenied(permissionDeniedResponse: PermissionDeniedResponse) {
-                    //permission denied
-                }
+                    override fun onPermissionDenied(permissionDeniedResponse: PermissionDeniedResponse) {
+                        // permission denied
+                    }
+                    
+                    override fun onPermissionRationaleShouldBeShown(permissionRequest: PermissionRequest, permissionToken: PermissionToken) {
+                        // permission denied
+                    }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    permissionRequest: PermissionRequest,
-                    permissionToken: PermissionToken
-                ) {
-                }
-
-            }).check()
+                }).check()
     }
 
     private fun enableLocation() {
@@ -260,48 +258,45 @@ class MainActivity : AppCompatActivity() {
 
     private fun getBitmapResource(drawable: Int): Bitmap {
         return BitmapFactory.decodeResource(
-            resources,
-            drawable
+                resources,
+                drawable
         )
     }
 
-    private fun addToFavourite(){
+    private fun addToFavourite() {
         binding.addToFavourite.setOnFavoriteChangeListener(
-            OnFavoriteChangeListener { _, favorite ->
-                 if(favorite){
-                     viewModel.insertFavouriteWeatherLocation(currentLocationWeather.toFavouriteLocationEntity(currentLocationName))
-                     binding.root.showSnackbar("Added to Favourites",Snackbar.LENGTH_LONG)
-                    }else{
+                OnFavoriteChangeListener { _, favorite ->
+                    if (favorite) {
+                        viewModel.insertFavouriteWeatherLocation(currentLocationWeather.toFavouriteLocationEntity(currentLocationName))
+                        binding.root.showSnackbar("Added to Favourites", Snackbar.LENGTH_LONG)
+                    } else {
                         viewModel.deleteFavouriteLocation(currentLocationWeather.toFavouriteLocationEntity(currentLocationName))
-                        binding.root.showSnackbar("Removed from Favourites",Snackbar.LENGTH_LONG)
+                        binding.root.showSnackbar("Removed from Favourites", Snackbar.LENGTH_LONG)
                     }
-
-
-            })
+                })
     }
 
     private fun updateStatusBarColor(bitMap: Bitmap) {
 
         Palette.Builder(bitMap)
-            .generate { result ->
+                .generate { result ->
 
-                result?.let {
-                    val dominantSwatch = it.dominantSwatch
+                    result?.let {
+                        val dominantSwatch = it.dominantSwatch
 
-                    if (dominantSwatch != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            val window: Window = window
-                            window.statusBarColor = dominantSwatch.rgb
-
-                        } else {
-                            val window: Window = window
-                            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                            window.statusBarColor = dominantSwatch.rgb
+                        if (dominantSwatch != null) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                val window: Window = window
+                                window.statusBarColor = dominantSwatch.rgb
+                            } else {
+                                val window: Window = window
+                                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                                window.statusBarColor = dominantSwatch.rgb
+                            }
                         }
                     }
                 }
-            }
     }
 
     private fun setBackGroundImage(currentWeather: CurrentWeather) {
@@ -342,11 +337,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openFavouritesFragment() {
-            val fragmentManager = supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.add(android.R.id.content, fragment!!)
-            fragmentTransaction.addToBackStack("favourite_fragment")
-            fragmentTransaction.commit()
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(android.R.id.content, fragment!!)
+        fragmentTransaction.addToBackStack("favourite_fragment")
+        fragmentTransaction.commit()
     }
 
     override fun onBackPressed() {

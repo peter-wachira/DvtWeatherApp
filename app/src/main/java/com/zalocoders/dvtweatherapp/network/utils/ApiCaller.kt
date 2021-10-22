@@ -1,7 +1,5 @@
-package com.zalocoders.dvtweatherapp.network
+package com.zalocoders.dvtweatherapp.network.utils
 
-import com.zalocoders.dvtweatherapp.network.utils.ErrorResponse
-import com.zalocoders.dvtweatherapp.network.utils.WeatherResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONException
@@ -11,7 +9,7 @@ import timber.log.Timber
 import java.io.IOException
 
 suspend fun <T> safeApiCall(
-    apiCall: suspend () -> T
+        apiCall: suspend () -> T
 ): WeatherResult<T> = withContext(Dispatchers.IO) {
     try {
         WeatherResult.Success(apiCall.invoke())
@@ -21,7 +19,7 @@ suspend fun <T> safeApiCall(
             is IOException -> WeatherResult.InternalError
             is HttpException -> {
                 val code = throwable.code()
-
+                
                 val errorResponse = convertErrorBody(throwable)
                 WeatherResult.ServerError(code, errorResponse)
             }
@@ -33,10 +31,10 @@ suspend fun <T> safeApiCall(
 }
 
 private fun convertErrorBody(throwable: HttpException): ErrorResponse {
-
+    
     val body = throwable.response()?.errorBody()
     val jsonString = body?.string()
-
+    
     val message = try {
         val jsonObject = JSONObject(jsonString)
         jsonObject.getString("message")
@@ -44,18 +42,16 @@ private fun convertErrorBody(throwable: HttpException): ErrorResponse {
         when (throwable.code()) {
             500 -> {
                 "Unable to complete request your request, try again later"
-
             }
             503 -> {
                 "Service temporarily unavailable, try again in a few minutes"
             }
             else -> {
                 "Unable to complete request your request, try again later"
-
             }
         }
     }
-
+    
     val errorCode = throwable.response()?.code()
     return ErrorResponse(message, errorCode, jsonString!!)
 }

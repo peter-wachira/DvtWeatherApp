@@ -8,47 +8,45 @@ import com.zalocoders.dvtweatherapp.db.FavouriteLocationDao
 import com.zalocoders.dvtweatherapp.db.WeatherForecastDao
 import com.zalocoders.dvtweatherapp.di.NetworkModule
 import com.zalocoders.dvtweatherapp.network.ApiService
-import com.zalocoders.dvtweatherapp.network.safeApiCall
+import com.zalocoders.dvtweatherapp.network.utils.safeApiCall
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(
-    private val apiService: ApiService,
-    private val favouriteLocationDao: FavouriteLocationDao,
-    private val weatherForecastDao: WeatherForecastDao,
-    @NetworkModule.ApiKey private val apiKey: String,
-
-    ) {
+        private val apiService: ApiService,
+        private val favouriteLocationDao: FavouriteLocationDao,
+        private val weatherForecastDao: WeatherForecastDao,
+        @NetworkModule.ApiKey private val apiKey: String,
+) {
 
     suspend fun getCurrentWeather(location: Location) = safeApiCall {
         apiService.getCurrentWeatherByLocation(
-            location.latitude.toString(),
-            location.longitude.toString(),
-            apiKey = apiKey
+                location.latitude.toString(),
+                location.longitude.toString(),
+                apiKey = apiKey
         )
     }
 
     suspend fun getForecast(location: Location) = safeApiCall {
         apiService.getCurrentForecastByLocation(
-            location.latitude.toString(),
-            location.longitude.toString(),
-            apiKey = apiKey
+                location.latitude.toString(),
+                location.longitude.toString(),
+                apiKey = apiKey
         )
     }
 
-    suspend fun insertCurrentLocationWeather(CurrentWeather:CurrentWeather) =
-        weatherForecastDao.insertCurrentLocationWeather(CurrentWeather)
+    suspend fun insertCurrentLocationWeather(CurrentWeather: CurrentWeather) =
+            weatherForecastDao.insertCurrentLocationWeather(CurrentWeather)
 
     suspend fun insertForeCast(foreCast: ForeCast) =
-        weatherForecastDao.insertForeCast(foreCast)
+            weatherForecastDao.insertForeCast(foreCast)
 
     suspend fun insertFavouriteWeatherLocation(favourite: Favourite) =
-        favouriteLocationDao.insertFavouriteLocation(favourite)
+            favouriteLocationDao.insertFavouriteLocation(favourite)
 
     fun getAllForeCasts() = weatherForecastDao.getAllForeCasts()
 
     fun getCurrentWeather() = weatherForecastDao.getCurrentWeather()
 
     suspend fun deleteFavouriteLocation(favourite: Favourite) =
-        favouriteLocationDao.deleteFavouriteLocation(favourite)
-
+            favouriteLocationDao.deleteFavouriteLocation(favourite)
 }

@@ -7,11 +7,10 @@ import android.location.LocationManager
 import androidx.core.app.ActivityCompat
 import androidx.core.location.LocationManagerCompat
 
-
 fun Context.isLocationPermissionEnabled(): Boolean {
     return ActivityCompat.checkSelfPermission(
-        this,
-        Manifest.permission.ACCESS_FINE_LOCATION
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 }
 

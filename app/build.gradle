@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs'
+    id 'io.gitlab.arturbosch.detekt'
 }
 
 android {
@@ -91,9 +92,19 @@ dependencies {
 
     //favourite
     implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
+}
 
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    autoCorrect = true
+    config = files("${project.rootDir}/detekt.yml")
+    baseline = file("${project.rootDir}/detekt-baseline.xml")
 
-
-
-
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        txt.enabled = true
+        sarif.enabled = true
+    }
 }

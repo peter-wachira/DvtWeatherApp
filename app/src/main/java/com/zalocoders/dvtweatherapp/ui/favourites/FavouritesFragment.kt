@@ -15,26 +15,26 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class FavouritesFragment : Fragment() {
-
+    
     private val binding: FragmentFavouritesBinding by lazy {
         FragmentFavouritesBinding.inflate(layoutInflater)
     }
-
+    
     private val viewModel: FavouriteViewModel by viewModels()
-
+    
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View = binding.root
-
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getAllFavouriteLocations()
     }
-
+    
     private fun getAllFavouriteLocations() {
         val favouriteLocationsAdapter = FavouriteLocationsAdapter()
-
+        
         lifecycleScope.launchWhenStarted {
             viewModel.getAllFavourites().collect { favouriteLocations ->
                 if (favouriteLocations.isNotEmpty()) {
@@ -42,7 +42,7 @@ class FavouritesFragment : Fragment() {
                 } else {
                     binding.errorLayout.show()
                 }
-
+                
                 with(binding.favouriteRecycler) {
                     adapter = favouriteLocationsAdapter
                 }

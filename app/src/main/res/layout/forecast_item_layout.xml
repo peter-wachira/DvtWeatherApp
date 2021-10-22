@@ -34,7 +34,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_date_name"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:contentDescription="TODO" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_weather_value"
