@@ -34,7 +34,6 @@ import com.zalocoders.dvtweatherapp.databinding.ActivityMainBinding
 import com.zalocoders.dvtweatherapp.db.mappers.toCurrentWeatherEntity
 import com.zalocoders.dvtweatherapp.db.mappers.toForeCastEntity
 import com.zalocoders.dvtweatherapp.network.utils.WeatherResult
-import com.zalocoders.dvtweatherapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
@@ -47,6 +46,13 @@ import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
 import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.dvtweatherapp.db.mappers.toFavouriteLocationEntity
 import com.zalocoders.dvtweatherapp.ui.favourites.FavouritesFragment
+import com.zalocoders.dvtweatherapp.utils.NetworkUtils
+import com.zalocoders.dvtweatherapp.utils.hide
+import com.zalocoders.dvtweatherapp.utils.isLocationPermissionEnabled
+import com.zalocoders.dvtweatherapp.utils.isUserLocationEnabled
+import com.zalocoders.dvtweatherapp.utils.show
+import com.zalocoders.dvtweatherapp.utils.showRetrySnackBar
+import com.zalocoders.dvtweatherapp.utils.showSnackbar
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -85,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 				
 				Timber.e(lastLocation.latitude.toString())
 				cancel()
-				if (NetworkUtils.isOnline(binding.root.context)) {
+				if (NetworkUtils.isOnline(this@MainActivity)) {
 					getCurrentWeather(lastLocation)
 					getForecast(lastLocation)
 				} else {
@@ -197,8 +203,8 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	private fun checkForLocationPermission() {
-		if (binding.root.context.isLocationPermissionEnabled()) {
-			if (binding.root.context.isUserLocationEnabled()) {
+		if (this@MainActivity.isLocationPermissionEnabled()) {
+			if (this@MainActivity.isUserLocationEnabled()) {
 				getUserCurrentLocation()
 			} else {
 				enableLocation()
@@ -209,7 +215,7 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	private fun requestLocationPermission() {
-		Dexter.withContext(binding.root.context)
+		Dexter.withContext(this@MainActivity)
 				.withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 				.withListener(object : PermissionListener {
 					override fun onPermissionGranted(ermissionGrantedResponse: PermissionGrantedResponse) {

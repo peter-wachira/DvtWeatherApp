@@ -23,5 +23,5 @@ object DatabaseModule {
 	fun provideWeatherForecastDao(weatherDatabase: WeatherDatabase) = weatherDatabase.weatherForecastDao()
 	
 	@Provides
-	fun provideSavedLocationDao(weatherDatabase: WeatherDatabase) = weatherDatabase.savedLocationDao()
+	fun provideSavedLocationDao(weatherDatabase: WeatherDatabase) = weatherDatabase.favouriteLocationDao()
 }

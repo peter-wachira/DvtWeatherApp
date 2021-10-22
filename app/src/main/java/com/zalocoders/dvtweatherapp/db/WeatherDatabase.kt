@@ -9,5 +9,5 @@ import com.zalocoders.dvtweatherapp.data.ForeCast
 @Database(entities = [CurrentWeather::class, ForeCast::class, Favourite::class], version = 1, exportSchema = false)
 abstract class WeatherDatabase : RoomDatabase() {
 	abstract fun weatherForecastDao(): WeatherForecastDao
-	abstract fun savedLocationDao(): FavouriteLocationDao
+	abstract fun favouriteLocationDao(): FavouriteLocationDao
 }

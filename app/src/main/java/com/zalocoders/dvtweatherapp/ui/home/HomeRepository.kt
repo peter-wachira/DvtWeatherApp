@@ -18,7 +18,7 @@ class HomeRepository @Inject constructor(
 		@NetworkModule.ApiKey private val apiKey: String,
 ) {
 	
-	suspend fun getCurrentWeather(location: Location) = safeApiCall {
+	suspend fun getLocalCurrentWeather(location: Location) = safeApiCall {
 		apiService.getCurrentWeatherByLocation(
 				location.latitude.toString(),
 				location.longitude.toString(),
@@ -34,8 +34,8 @@ class HomeRepository @Inject constructor(
 		)
 	}
 	
-	suspend fun insertCurrentLocationWeather(CurrentWeather: CurrentWeather) =
-			weatherForecastDao.insertCurrentLocationWeather(CurrentWeather)
+	suspend fun insertCurrentLocationWeather(currentWeather: CurrentWeather) =
+			weatherForecastDao.insertCurrentLocationWeather(currentWeather)
 	
 	suspend fun insertForeCast(foreCast: ForeCast) =
 			weatherForecastDao.insertForeCast(foreCast)
@@ -45,7 +45,7 @@ class HomeRepository @Inject constructor(
 	
 	fun getAllForeCasts() = weatherForecastDao.getAllForeCasts()
 	
-	fun getCurrentWeather() = weatherForecastDao.getCurrentWeather()
+	fun getLocalCurrentWeather() = weatherForecastDao.getCurrentWeather()
 	
 	suspend fun deleteFavouriteLocation(favourite: Favourite) =
 			favouriteLocationDao.deleteFavouriteLocation(favourite)
