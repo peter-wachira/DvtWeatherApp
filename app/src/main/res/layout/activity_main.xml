@@ -49,8 +49,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:mfb_color="white"
             app:mfb_padding="12"
-            app:mfb_size="80"
-            app:mfb_type="star" />
+            app:mfb_size="40"
+            app:mfb_type="heart" />
 
 
         <com.google.android.material.textview.MaterialTextView

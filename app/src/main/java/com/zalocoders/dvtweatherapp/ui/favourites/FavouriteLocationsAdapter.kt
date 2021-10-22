@@ -35,7 +35,6 @@ class FavouriteLocationsAdapter :
 	override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
 		holder.bind(getItem(position))
 	}
-	
 }
 
 val diffUtil = object : DiffUtil.ItemCallback<Favourite>() {
