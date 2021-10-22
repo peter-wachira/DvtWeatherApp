@@ -44,12 +44,12 @@
 <img  width="200" height="400" src="./screenshort/1.png"/>
 </td>
 <td>
+<img  width="200" height="400" src="./screenshort/3.png"/>
+</td>
+<td>
 <img  width="200" height="400" src="./screenshort/2.png"/>
 </td>
 </tr>
-<td>
-<img  width="200" height="400" src="./screenshort/3.png"/>
-</td>
 <td>
 <img  width="200" height="400" src="./screenshort/4.png"/>
 </td>
