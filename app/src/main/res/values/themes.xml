@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.DvtWeatherApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#69DADB</item>
-        <item name="colorPrimaryVariant">#69DADB</item>
+        <item name="colorPrimary">@color/cloudy</item>
+        <item name="colorPrimaryVariant">@color/cloudy</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="fontFamily">@font/work_sans</item>
         <!-- Secondary brand color. -->

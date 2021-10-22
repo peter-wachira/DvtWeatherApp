@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 		initViews()
 	}
 	
+	
 	private fun initViews() {
 		binding.favouriteLocationsFab.setOnClickListener {
 			openFavouritesFragment()
@@ -100,7 +101,6 @@ class MainActivity : AppCompatActivity() {
 					Timber.e("Offline")
 					getLocalCurrentWeather()
 					getLocalWeatherForecast()
-					
 				}
 			}
 		}
@@ -233,7 +233,11 @@ class MainActivity : AppCompatActivity() {
 				.withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 				.withListener(object : PermissionListener {
 					override fun onPermissionGranted(ermissionGrantedResponse: PermissionGrantedResponse) {
-						getUserCurrentLocation()
+						if (isUserLocationEnabled()) {
+							getUserCurrentLocation()
+						} else {
+							enableLocation()
+						}
 					}
 					
 					override fun onPermissionDenied(permissionDeniedResponse: PermissionDeniedResponse) {

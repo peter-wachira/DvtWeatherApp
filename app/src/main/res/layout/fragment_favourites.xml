@@ -50,9 +50,7 @@
             android:text="@string/you_do_not_have_any_favourite_location_yet"
             android:textColor="@android:color/darker_gray" />
 
-
     </LinearLayout>
-
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -60,6 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
+        android:layout_marginTop="18dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
