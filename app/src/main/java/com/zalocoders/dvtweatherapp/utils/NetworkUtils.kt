@@ -5,29 +5,22 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 
+
 object NetworkUtils {
 	fun isOnline(context: Context): Boolean {
-		val connectivityManager =
-				context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-			val capabilities =
-					connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-			if (capabilities != null) {
-				when {
-					capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-						return true
-					}
-					capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-						return true
-					}
-				}
+		val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			val n = cm.activeNetwork
+			if (n != null) {
+				val nc = cm.getNetworkCapabilities(n)
+				return nc!!.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(
+						NetworkCapabilities.TRANSPORT_WIFI)
 			}
+			return false
 		} else {
-			val activeNetworkInfo = connectivityManager.activeNetworkInfo
-			if (activeNetworkInfo != null && activeNetworkInfo.isConnected) {
-				return true
-			}
+			val netInfo = cm.activeNetworkInfo
+			return netInfo != null && netInfo.isConnectedOrConnecting
 		}
-		return false
 	}
 }

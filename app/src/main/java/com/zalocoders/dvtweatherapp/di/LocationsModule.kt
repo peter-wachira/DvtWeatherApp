@@ -2,6 +2,7 @@ package com.zalocoders.dvtweatherapp.di
 
 import android.content.Context
 import android.location.Geocoder
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.Module
 import dagger.Provides
@@ -20,6 +21,6 @@ object LocationsModule {
 	
 	@Provides
 	@Singleton
-	fun provideFusedLocationClient(@ApplicationContext context: Context) =
+	fun provideFusedLocationClient(@ApplicationContext context: Context): FusedLocationProviderClient =
 			LocationServices.getFusedLocationProviderClient(context)
 }

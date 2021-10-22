@@ -1,6 +1,7 @@
 package com.zalocoders.dvtweatherapp.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -92,11 +93,14 @@ class MainActivity : AppCompatActivity() {
 				Timber.e(lastLocation.latitude.toString())
 				cancel()
 				if (NetworkUtils.isOnline(this@MainActivity)) {
+					Timber.e("Online")
 					getCurrentWeather(lastLocation)
 					getForecast(lastLocation)
 				} else {
+					Timber.e("Offline")
 					getLocalCurrentWeather()
 					getLocalWeatherForecast()
+					
 				}
 			}
 		}
@@ -117,6 +121,9 @@ class MainActivity : AppCompatActivity() {
 								viewModel.insertForeCast(forecast)
 							}
 						}
+					}
+					is WeatherResult.InternalError -> {
+						getLocalWeatherForecast()
 					}
 				}
 			}
@@ -150,7 +157,13 @@ class MainActivity : AppCompatActivity() {
 						setUpCurrentWeatherViews(currentWeather)
 					}
 					is WeatherResult.ServerError -> {
-						binding.root.showRetrySnackBar("An Error Occurred") {
+						binding.root.showRetrySnackBar("You are offline") {
+							checkForLocationPermission()
+						}
+					}
+					is WeatherResult.InternalError -> {
+						getLocalCurrentWeather()
+						binding.root.showRetrySnackBar("Offline Mode") {
 							checkForLocationPermission()
 						}
 					}
@@ -159,6 +172,7 @@ class MainActivity : AppCompatActivity() {
 		}
 	}
 	
+	@SuppressLint("SetTextI18n")
 	private fun setUpCurrentWeatherViews(currentWeather: CurrentWeather) {
 		with(binding) {
 			tvTemp.text = currentWeather.normalTemp.toString() + " \u2103"
@@ -203,8 +217,8 @@ class MainActivity : AppCompatActivity() {
 	}
 	
 	private fun checkForLocationPermission() {
-		if (this@MainActivity.isLocationPermissionEnabled()) {
-			if (this@MainActivity.isUserLocationEnabled()) {
+		if (isLocationPermissionEnabled()) {
+			if (isUserLocationEnabled()) {
 				getUserCurrentLocation()
 			} else {
 				enableLocation()
@@ -274,10 +288,10 @@ class MainActivity : AppCompatActivity() {
 				OnFavoriteChangeListener { _, favorite ->
 					if (favorite) {
 						viewModel.insertFavouriteWeatherLocation(currentLocationWeather.toFavouriteLocationEntity(currentLocationName))
-						binding.root.showSnackbar("Added to Favourites", Snackbar.LENGTH_LONG)
+						binding.root.showSnackbar("Added to Favourites", Snackbar.LENGTH_SHORT)
 					} else {
 						viewModel.deleteFavouriteLocation(currentLocationWeather.toFavouriteLocationEntity(currentLocationName))
-						binding.root.showSnackbar("Removed from Favourites", Snackbar.LENGTH_LONG)
+						binding.root.showSnackbar("Removed from Favourites", Snackbar.LENGTH_SHORT)
 					}
 				})
 	}
