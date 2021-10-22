@@ -27,70 +27,70 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-        private val homeRepository: HomeRepository,
-        private val client: FusedLocationProviderClient
+		private val homeRepository: HomeRepository,
+		private val client: FusedLocationProviderClient
 ) : ViewModel() {
-
-    private var _isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    fun getCurrentWeather(location: Location) = flow {
-        _isLoading.value = true
-        emit(homeRepository.getCurrentWeather(location))
-        _isLoading.value = false
-    }
-
-    fun getForecast(location: Location) = flow {
-        _isLoading.value = true
-        emit(homeRepository.getForecast(location))
-        _isLoading.value = false
-    }
-
-    fun insertCurrentLocation(currentWeather: CurrentWeather) =
-            viewModelScope.launch(Dispatchers.IO) {
-                homeRepository.insertCurrentLocationWeather(currentWeather)
-            }
-
-    fun insertForeCast(foreCast: ForeCast) =
-            viewModelScope.launch(Dispatchers.IO) {
-                homeRepository.insertForeCast(foreCast)
-            }
-
-    fun insertFavouriteWeatherLocation(favourite: Favourite) =
-            viewModelScope.launch(Dispatchers.IO) {
-                homeRepository.insertFavouriteWeatherLocation(favourite)
-            }
-
-    fun deleteFavouriteLocation(favourite: Favourite) =
-            viewModelScope.launch(Dispatchers.IO) {
-                homeRepository.deleteFavouriteLocation(favourite)
-            }
-
-    fun getAllForeCasts() = homeRepository.getAllForeCasts()
-    fun getCurrentWeather() = homeRepository.getCurrentWeather()
-
-    @ExperimentalCoroutinesApi
-    @SuppressLint("MissingPermission")
-    fun getCurrentLocation(): Flow<Location> = callbackFlow {
-        val locationRequest = LocationRequest.create().apply {
-            UPDATE_INTERVAL
-            FASTEST_UPDATE_INTERVAL
-            LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        val callBack = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                super.onLocationResult(locationResult)
-                val location = locationResult.lastLocation
-                Timber.e("Current Location $location")
-                offer(location)
-            }
-        }
-        client.requestLocationUpdates(locationRequest, callBack, Looper.getMainLooper())
-        awaitClose { client.removeLocationUpdates(callBack) }
-    }
-
-    companion object {
-        private const val UPDATE_INTERVAL = 1000L
-        private const val FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL
-    }
+	
+	private var _isLoading: MutableLiveData<Boolean> = MutableLiveData()
+	val isLoading: LiveData<Boolean> = _isLoading
+	
+	fun getCurrentWeather(location: Location) = flow {
+		_isLoading.value = true
+		emit(homeRepository.getCurrentWeather(location))
+		_isLoading.value = false
+	}
+	
+	fun getForecast(location: Location) = flow {
+		_isLoading.value = true
+		emit(homeRepository.getForecast(location))
+		_isLoading.value = false
+	}
+	
+	fun insertCurrentLocation(currentWeather: CurrentWeather) =
+			viewModelScope.launch(Dispatchers.IO) {
+				homeRepository.insertCurrentLocationWeather(currentWeather)
+			}
+	
+	fun insertForeCast(foreCast: ForeCast) =
+			viewModelScope.launch(Dispatchers.IO) {
+				homeRepository.insertForeCast(foreCast)
+			}
+	
+	fun insertFavouriteWeatherLocation(favourite: Favourite) =
+			viewModelScope.launch(Dispatchers.IO) {
+				homeRepository.insertFavouriteWeatherLocation(favourite)
+			}
+	
+	fun deleteFavouriteLocation(favourite: Favourite) =
+			viewModelScope.launch(Dispatchers.IO) {
+				homeRepository.deleteFavouriteLocation(favourite)
+			}
+	
+	fun getAllForeCasts() = homeRepository.getAllForeCasts()
+	fun getCurrentWeather() = homeRepository.getCurrentWeather()
+	
+	@ExperimentalCoroutinesApi
+	@SuppressLint("MissingPermission")
+	fun getCurrentLocation(): Flow<Location> = callbackFlow {
+		val locationRequest = LocationRequest.create().apply {
+			UPDATE_INTERVAL
+			FASTEST_UPDATE_INTERVAL
+			LocationRequest.PRIORITY_HIGH_ACCURACY
+		}
+		val callBack = object : LocationCallback() {
+			override fun onLocationResult(locationResult: LocationResult) {
+				super.onLocationResult(locationResult)
+				val location = locationResult.lastLocation
+				Timber.e("Current Location $location")
+				offer(location)
+			}
+		}
+		client.requestLocationUpdates(locationRequest, callBack, Looper.getMainLooper())
+		awaitClose { client.removeLocationUpdates(callBack) }
+	}
+	
+	companion object {
+		private const val UPDATE_INTERVAL = 1000L
+		private const val FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL
+	}
 }

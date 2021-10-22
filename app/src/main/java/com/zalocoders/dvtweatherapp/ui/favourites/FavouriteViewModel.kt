@@ -10,14 +10,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavouriteViewModel @Inject constructor(
-        private val favouriteRepository: FavouriteRepository
+		private val favouriteRepository: FavouriteRepository
 ) : ViewModel() {
-    
-    fun getAllFavourites() = favouriteRepository.getAllFavouriteLocations()
-    
-    fun deleteFavouriteLocation(favourite: Favourite) = viewModelScope.launch(
-            Dispatchers.IO) {
-        favouriteRepository.deleteFavouriteLocation(favourite)
-    }
-    
+	
+	fun getAllFavourites() = favouriteRepository.getAllFavouriteLocations()
+	
+	fun deleteFavouriteLocation(favourite: Favourite) = viewModelScope.launch(
+			Dispatchers.IO) {
+		favouriteRepository.deleteFavouriteLocation(favourite)
+	}
+	
 }

@@ -13,13 +13,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object LocationsModule {
-    
-    @Provides
-    @Singleton
-    fun provideGeoCoder(@ApplicationContext context: Context) = Geocoder(context)
-    
-    @Provides
-    @Singleton
-    fun provideFusedLocationClient(@ApplicationContext context: Context) =
-            LocationServices.getFusedLocationProviderClient(context)
+	
+	@Provides
+	@Singleton
+	fun provideGeoCoder(@ApplicationContext context: Context) = Geocoder(context)
+	
+	@Provides
+	@Singleton
+	fun provideFusedLocationClient(@ApplicationContext context: Context) =
+			LocationServices.getFusedLocationProviderClient(context)
 }

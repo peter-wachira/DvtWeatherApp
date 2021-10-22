@@ -12,16 +12,16 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-    
-    @Provides
-    fun provideWeatherDatabase(@ApplicationContext context: Context) =
-            Room.databaseBuilder(context, WeatherDatabase::class.java, "weather_db")
-                    .fallbackToDestructiveMigration()
-                    .build()
-    
-    @Provides
-    fun provideWeatherForecastDao(weatherDatabase: WeatherDatabase) = weatherDatabase.weatherForecastDao()
-    
-    @Provides
-    fun provideSavedLocationDao(weatherDatabase: WeatherDatabase) = weatherDatabase.savedLocationDao()
+	
+	@Provides
+	fun provideWeatherDatabase(@ApplicationContext context: Context) =
+			Room.databaseBuilder(context, WeatherDatabase::class.java, "weather_db")
+					.fallbackToDestructiveMigration()
+					.build()
+	
+	@Provides
+	fun provideWeatherForecastDao(weatherDatabase: WeatherDatabase) = weatherDatabase.weatherForecastDao()
+	
+	@Provides
+	fun provideSavedLocationDao(weatherDatabase: WeatherDatabase) = weatherDatabase.savedLocationDao()
 }

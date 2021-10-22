@@ -5,12 +5,12 @@ import com.zalocoders.dvtweatherapp.db.FavouriteLocationDao
 import javax.inject.Inject
 
 class FavouriteRepository @Inject constructor(
-        private val favouriteLocationDao: FavouriteLocationDao
+		private val favouriteLocationDao: FavouriteLocationDao
 ) {
-    
-    fun getAllFavouriteLocations() = favouriteLocationDao.getAllFavouriteLocation()
-    
-    suspend fun deleteFavouriteLocation(favourite: Favourite) =
-            favouriteLocationDao.deleteFavouriteLocation(favourite)
-    
+	
+	fun getAllFavouriteLocations() = favouriteLocationDao.getAllFavouriteLocation()
+	
+	suspend fun deleteFavouriteLocation(favourite: Favourite) =
+			favouriteLocationDao.deleteFavouriteLocation(favourite)
+	
 }
