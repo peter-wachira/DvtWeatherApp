@@ -8,10 +8,6 @@
  - Paste your open weather API key to ``api_key`` on `strings.xml`
  - Build the project
 
-### Background
-
-Develop an application that:
-
 * gets current weather forecast of a location and displays forecast over the next week.
 * Shows a list of favourite locations
 
