@@ -8,8 +8,6 @@
  - Paste your open weather API key to ``api_key`` on `strings.xml`
  - Build the project
 
-To inspect the local db/cache, run the project on a device with Android 8+
-
 ### Background
 
 Develop an application that:
@@ -44,7 +42,27 @@ Develop an application that:
 * CI/CD
     * Github Actions
 
-
+<table>
+<tr>
+<td>
+<img  width="200" height="400" src="./screenshort/1.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/2.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/6.png"/>
+</td>
+</tr>
+<td>
+<img  width="200" height="400" src="./screenshort/7.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/5.png"/>
+</td>
+<td>
+</tr>
+</table>
 
 
 
