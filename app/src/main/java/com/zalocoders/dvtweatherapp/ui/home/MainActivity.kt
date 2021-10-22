@@ -319,6 +319,22 @@ class MainActivity : AppCompatActivity() {
 				}
 	}
 	
+	private fun openFavouritesFragment() {
+		val fragmentManager = supportFragmentManager
+		val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+		fragmentTransaction.add(android.R.id.content, fragment!!)
+		fragmentTransaction.addToBackStack("favourite_fragment")
+		fragmentTransaction.commit()
+	}
+	
+	override fun onBackPressed() {
+		if (supportFragmentManager.backStackEntryCount > 0) {
+			supportFragmentManager.popBackStack()
+		} else {
+			super.onBackPressed()
+		}
+	}
+	
 	private fun setBackGroundImage(currentWeather: CurrentWeather) {
 		when {
 			currentWeather.weatherConditionName.contains("rain", true) -> {
@@ -356,19 +372,4 @@ class MainActivity : AppCompatActivity() {
 		}
 	}
 	
-	private fun openFavouritesFragment() {
-		val fragmentManager = supportFragmentManager
-		val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-		fragmentTransaction.add(android.R.id.content, fragment!!)
-		fragmentTransaction.addToBackStack("favourite_fragment")
-		fragmentTransaction.commit()
-	}
-	
-	override fun onBackPressed() {
-		if (supportFragmentManager.backStackEntryCount > 0) {
-			supportFragmentManager.popBackStack()
-		} else {
-			super.onBackPressed()
-		}
-	}
 }
