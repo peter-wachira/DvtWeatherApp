@@ -41,9 +41,6 @@
 <table>
 <tr>
 <td>
-<img  width="200" height="400" src="./screenshort/5.png"/>
-</td>
-<td>
 <img  width="200" height="400" src="./screenshort/1.png"/>
 </td>
 <td>
