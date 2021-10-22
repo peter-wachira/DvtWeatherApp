@@ -60,8 +60,9 @@ Develop an application that:
 <td>
 <img  width="200" height="400" src="./screenshort/4.png"/>
 </td>
-<img  width="200" height="400" src="./screenshort/6.png"/>
 <td>
+<img  width="200" height="400" src="./screenshort/6.png"/>
+</td>
 </tr>
 </table>
 
