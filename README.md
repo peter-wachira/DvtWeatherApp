@@ -46,30 +46,27 @@
 <img  width="200" height="400" src="./screenshort/8.png"/>
 </td>
 <td>
-<img  width="200" height="400" src="./screenshort/1.png"/>
-</td>
-<td>
 <img  width="200" height="400" src="./screenshort/9.png"/>
 </td>
-</tr>
-<tr>
 <td>
 <img  width="200" height="400" src="./screenshort/10.png"/>
 </td>
+</tr>
+
+<tr>
 <td>
 <img  width="200" height="400" src="./screenshort/3.png"/>
+</td>
+<td>
+<img  width="200" height="400" src="./screenshort/12.png"/>
 </td>
 <td>
 <img  width="200" height="400" src="./screenshort/11.png"/>
 </td>
 <tr>
 <td>
-<img  width="200" height="400" src="./screenshort/12.png"/>
-</td>
-<td>
 <img  width="200" height="400" src="./screenshort/6.png"/>
 </td>
-</tr>
 </tr>
 </table>
 
