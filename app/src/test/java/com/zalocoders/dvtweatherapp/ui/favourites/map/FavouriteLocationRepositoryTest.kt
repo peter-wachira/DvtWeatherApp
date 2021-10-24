@@ -20,7 +20,6 @@ class FavouriteLocationRepositoryTest:BaseTest(){
 		super.setup()
 		favouriteLocationRepository = FavouriteLocationRepository(favouriteDao ,foreCastDao)
 		homeRepository = HomeRepository(apiService,favouriteDao ,foreCastDao,"api key")
-		
 	}
 	
 	@Test

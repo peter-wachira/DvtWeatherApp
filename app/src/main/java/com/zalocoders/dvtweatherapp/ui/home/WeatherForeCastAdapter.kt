@@ -17,7 +17,7 @@ class WeatherForeCastAdapter : ListAdapter<ForeCast, WeatherForeCastAdapter.Fore
 		
 		fun bind(item: ForeCast) {
 			with(binding) {
-				tvWeatherValue.text = "${item.normalTemp} ℃\""
+				tvWeatherValue.text = "${item.normalTemp} ℃"
 				tvDateName.text = formatTime(item.lastUpdated)
 				
 				val id = item.weatherCondition

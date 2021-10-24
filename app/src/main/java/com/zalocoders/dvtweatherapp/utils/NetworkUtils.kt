@@ -1,5 +1,6 @@
 package com.zalocoders.dvtweatherapp.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -7,6 +8,7 @@ import android.os.Build
 
 
 object NetworkUtils {
+	@SuppressLint("MissingPermission")
 	fun isOnline(context: Context): Boolean {
 		val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 		

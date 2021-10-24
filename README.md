@@ -3,15 +3,15 @@
 
 ## Pre Requisities
 - [A valid Open Weather API Key](https://openweathermap.org/appid)
-- [A valid Google maps Api]
+- A valid Google maps Api Key
 
 ## Setup
  - Paste your open weather API key to ``api_key`` on `strings.xml`
- - Paste you Google Api key in local.properties.
+ - Paste you Google Api key in ``local.properties``
  - Build the project
 
 * gets current weather forecast of a location and displays forecast over the next week.
-* Shows a list of favourite locations
+* Shows a list of favourite locations a map
 
 ## Tech-stack
 
