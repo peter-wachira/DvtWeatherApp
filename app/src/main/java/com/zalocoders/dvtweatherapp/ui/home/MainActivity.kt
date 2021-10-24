@@ -109,16 +109,22 @@ class MainActivity : AppCompatActivity() {
 			viewModel.getForecast(location).collect { response ->
 				when (response) {
 					is WeatherResult.Success -> {
-						val data = response.data.toForeCastEntity(geoCodeLocation(location.latitude, location.longitude))
+						val geoCodeResult = geoCodeLocation(location.latitude, location.longitude)
 						
-						if (data.isNotEmpty()) {
+						if(geoCodeResult.isNotEmpty()){
+							val data = response.data.toForeCastEntity(geoCodeResult)
 							
-							setUpRecyclerView(data)
-							
-							for (forecast in data) {
-								viewModel.insertForeCast(forecast)
+							if (data.isNotEmpty()) {
+								
+								setUpRecyclerView(data)
+								
+								for (forecast in data) {
+									viewModel.insertForeCast(forecast)
+								}
 							}
 						}
+						
+					
 					}
 					is WeatherResult.InternalError -> {
 						getLocalWeatherForecast()

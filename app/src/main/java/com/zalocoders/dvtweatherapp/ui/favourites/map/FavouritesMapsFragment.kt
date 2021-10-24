@@ -1,6 +1,7 @@
 package com.zalocoders.dvtweatherapp.ui.favourites.map
 
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,12 +14,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.zalocoders.dvtweatherapp.R
 import com.zalocoders.dvtweatherapp.databinding.FragmentFavouritesMapsBinding
 import com.zalocoders.dvtweatherapp.utils.getWeatherIcon
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
@@ -42,14 +45,25 @@ class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
 		
 	}
 	
+	@SuppressLint("MissingPermission")
 	override fun onMapReady(map: GoogleMap) {
 		favouritesMap = map
 		favouritesMap.isBuildingsEnabled = false
+		favouritesMap.uiSettings.isMapToolbarEnabled = false
+		favouritesMap.uiSettings.isMyLocationButtonEnabled = false
+		favouritesMap.isMyLocationEnabled = true
+		
+		favouritesMap.setMapStyle(
+				MapStyleOptions.loadRawResourceStyle(
+						binding.root.context,
+						R.raw.maps_styling
+				)
+		)
 		zoomMapWithCurrentLocation()
 		addLocationsToMap()
 	}
 	
-	fun zoomMapWithCurrentLocation(){
+	private fun zoomMapWithCurrentLocation(){
 		lifecycleScope.launchWhenStarted {
 			viewModel.getMostCurrentCurrentWeather().collect { currentWeather ->
 				val latLng = LatLng(currentWeather.lat, currentWeather.lng)
@@ -62,16 +76,16 @@ class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
 	private fun addLocationsToMap(){
 		lifecycleScope.launchWhenStarted {
 			viewModel.getAllFavourites().collect { favouriteLocations ->
+				
 				if(favouriteLocations.isNotEmpty()){
 					
 					for(favourite in favouriteLocations){
 						val latLng = LatLng(favourite.lat,favourite.lng)
+						val condition = favourite.weatherConditionName
 						
 						val markerOptions = MarkerOptions()
-						markerOptions.title(favourite.name)
+						markerOptions.title("${favourite.name} was "+ condition)
 						markerOptions.position(latLng)
-						
-						val condition = favourite.weatherCondition
 						
 						when {
 							condition.contains("rain", true) -> {
@@ -81,7 +95,7 @@ class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
 								markerOptions.icon(binding.root.context.getWeatherIcon(R.drawable.clear))
 							}
 							condition.contains("cloud", true) -> {
-								markerOptions.icon(binding.root.context.getWeatherIcon(R.drawable.sun))
+								markerOptions.icon(binding.root.context.getWeatherIcon(R.drawable.clouds))
 							}
 						}
 						favouritesMap.addMarker(markerOptions)

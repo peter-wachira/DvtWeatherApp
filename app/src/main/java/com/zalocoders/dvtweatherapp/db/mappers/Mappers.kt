@@ -39,7 +39,6 @@ fun CurrentLocationWeatherResponse.toCurrentWeatherEntity(locationName: String =
 			highTemp = main.tempMax.toInt(),
 			lowTemp = main.tempMin.toInt(),
 			lastUpdated = System.currentTimeMillis(),
-			isCurrent = true,
 			weatherCondition = weather[0].id.toString(),
 			weatherConditionName = weather[0].description
 	)
@@ -54,7 +53,6 @@ fun CurrentWeather.toFavouriteLocationEntity(locationName: String = ""): Favouri
 			highTemp = highTemp,
 			lowTemp = lowTemp,
 			lastUpdated = System.currentTimeMillis(),
-			isCurrent = true,
 			weatherCondition = weatherCondition,
 			weatherConditionName = weatherConditionName
 	)

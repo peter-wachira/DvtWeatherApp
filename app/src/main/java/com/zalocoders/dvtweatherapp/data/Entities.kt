@@ -26,7 +26,6 @@ data class CurrentWeather(
 		@ColumnInfo(name = "highTemp") val highTemp: Int,
 		@ColumnInfo(name = "lowTemp") val lowTemp: Int,
 		@ColumnInfo(name = "lastUpdated") val lastUpdated: Long,
-		@ColumnInfo(name = "isCurrent") val isCurrent: Boolean = false,
 		@ColumnInfo(name = "condition") val weatherCondition: String,
 		@ColumnInfo(name = "conditionName") val weatherConditionName: String
 )
@@ -41,7 +40,6 @@ data class Favourite(
 		@ColumnInfo(name = "highTemp") val highTemp: Int,
 		@ColumnInfo(name = "lowTemp") val lowTemp: Int,
 		@ColumnInfo(name = "lastUpdated") val lastUpdated: Long,
-		@ColumnInfo(name = "isCurrent") val isCurrent: Boolean = false,
 		@ColumnInfo(name = "condition") val weatherCondition: String,
 		@ColumnInfo(name = "conditionName") val weatherConditionName: String
 )

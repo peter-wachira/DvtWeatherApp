@@ -17,8 +17,8 @@ class WeatherForeCastAdapter : ListAdapter<ForeCast, WeatherForeCastAdapter.Fore
 		
 		fun bind(item: ForeCast) {
 			with(binding) {
-				tvDateName.text = formatTime(item.lastUpdated)
 				tvWeatherValue.text = "${item.normalTemp} ℃\""
+				tvDateName.text = formatTime(item.lastUpdated)
 				
 				val id = item.weatherCondition
 				updateWeatherIcons(id)
@@ -45,7 +45,6 @@ class WeatherForeCastAdapter : ListAdapter<ForeCast, WeatherForeCastAdapter.Fore
 				//Snow - 6
 				id.startsWith("6", true) -> {
 					updateHomeBackgrounds(R.drawable.rain)
-					
 				}
 				
 				//Atmosphere - 7
@@ -59,14 +58,8 @@ class WeatherForeCastAdapter : ListAdapter<ForeCast, WeatherForeCastAdapter.Fore
 				}
 				
 				id.equals("800", true) -> {
-					updateHomeBackgrounds(R.drawable.sun)
+					updateHomeBackgrounds(R.drawable.ic_sunny)
 				}
-				
-				//sunny/clear - 8
-				id.equals("8", true) -> {
-					updateHomeBackgrounds(R.drawable.clear)
-				}
-				
 			}
 		}
 		

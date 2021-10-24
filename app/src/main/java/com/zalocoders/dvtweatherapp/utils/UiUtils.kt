@@ -53,12 +53,14 @@ fun View.showRetrySnackBar(message: String, action: ((View) -> Unit)?) {
 fun Context.getWeatherIcon(drawable:Int): BitmapDescriptor {
 	val weatherIcon = ContextCompat.getDrawable(this,drawable) as BitmapDrawable
 	
+	
 	val smallMarker = Bitmap.createScaledBitmap(weatherIcon.bitmap, 100, 100, false)
+	
+	val color = Color.BLUE
 	
 	val paint = Paint()
 	val canvas = Canvas(smallMarker)
 	
-	val color = Color.BLUE
 	paint.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
 	canvas.drawBitmap(smallMarker, 0F, 0F, paint)
 	return BitmapDescriptorFactory.fromBitmap(smallMarker)
