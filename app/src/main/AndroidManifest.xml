@@ -18,7 +18,9 @@
         android:theme="@style/Theme.DvtWeatherApp">
         <activity
             android:name=".ui.favourites.FavouritesActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.DvtWeatherApp.ActionBar"/>
+
         <activity
             android:name=".ui.home.MainActivity"
             android:exported="true">
