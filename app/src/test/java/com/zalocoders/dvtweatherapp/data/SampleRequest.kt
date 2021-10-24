@@ -1,7 +1,5 @@
 package com.zalocoders.dvtweatherapp.data
 
-import com.zalocoders.dvtweatherapp.data.Favourite
-
 object SampleRequest {
     val sampleFavourite = Favourite(
             "Nairobi",
@@ -10,10 +8,8 @@ object SampleRequest {
             25,
             20,
             System.currentTimeMillis(),
-            true,
-            "800",
-            "Clear"
-
+            "sunny",
+            "800"
     )
     
     val sampleCurrentWeather = CurrentWeather(
@@ -23,9 +19,7 @@ object SampleRequest {
             25,
             20,
             System.currentTimeMillis(),
-            true,
-            "800",
-            "Clear"
-    
+            "rainy",
+            "800"
     )
 }

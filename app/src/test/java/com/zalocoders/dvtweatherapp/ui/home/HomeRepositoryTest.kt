@@ -43,7 +43,7 @@ class HomeRepositoryTest:BaseTest() {
 	}
 	
 	@Test
-	fun `test inserting weather DB`() {
+	fun `test inserting current weather into database`() {
 		runBlocking {
 			homeRepository.insertCurrentLocationWeather(SampleRequest.sampleCurrentWeather)
 			
