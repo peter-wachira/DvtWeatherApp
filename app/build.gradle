@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
     def nav_version = "2.3.5"
 
     // Design

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.favourites.FavouritesFragment">
+    tools:context=".ui.favourites.list.FavouritesFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -21,6 +21,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/view_map_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="view in Map"
+        app:icon="@drawable/map_icon"
+        app:iconTint="@color/cloudy"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/cloudy"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <LinearLayout
         android:id="@+id/error_layout"
@@ -58,14 +69,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
-        android:layout_marginTop="18dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton"
         tools:itemCount="15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

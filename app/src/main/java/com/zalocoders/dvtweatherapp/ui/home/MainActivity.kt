@@ -46,14 +46,11 @@ import kotlin.system.exitProcess
 import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
 import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.dvtweatherapp.db.mappers.toFavouriteLocationEntity
-import com.zalocoders.dvtweatherapp.ui.favourites.FavouritesFragment
+import com.zalocoders.dvtweatherapp.ui.favourites.FavouritesActivity
+import com.zalocoders.dvtweatherapp.ui.favourites.list.FavouritesFragment
 import com.zalocoders.dvtweatherapp.utils.NetworkUtils
-import com.zalocoders.dvtweatherapp.utils.hide
 import com.zalocoders.dvtweatherapp.utils.isLocationPermissionEnabled
 import com.zalocoders.dvtweatherapp.utils.isUserLocationEnabled
-import com.zalocoders.dvtweatherapp.utils.show
-import com.zalocoders.dvtweatherapp.utils.showRetrySnackBar
-import com.zalocoders.dvtweatherapp.utils.showSnackbar
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 	private lateinit var binding: ActivityMainBinding
 	
 	private val viewModel: HomeViewModel by viewModels()
-	private var fragment: FavouritesFragment? = null
 	
 	private lateinit var currentLocationWeather: CurrentWeather
 	private lateinit var currentLocationName: String
@@ -80,10 +76,8 @@ class MainActivity : AppCompatActivity() {
 	
 	private fun initViews() {
 		binding.favouriteLocationsFab.setOnClickListener {
-			openFavouritesFragment()
+			startActivity(Intent(this,FavouritesActivity::class.java))
 		}
-		
-		fragment = FavouritesFragment()
 	}
 	
 	
@@ -323,13 +317,6 @@ class MainActivity : AppCompatActivity() {
 				}
 	}
 	
-	private fun openFavouritesFragment() {
-		val fragmentManager = supportFragmentManager
-		val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-		fragmentTransaction.add(android.R.id.content, fragment!!)
-		fragmentTransaction.addToBackStack("favourite_fragment")
-		fragmentTransaction.commit()
-	}
 	
 	override fun onBackPressed() {
 		if (supportFragmentManager.backStackEntryCount > 0) {

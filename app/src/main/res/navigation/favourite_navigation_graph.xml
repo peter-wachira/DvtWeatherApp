@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favourite_navigation_graph"
+    app:startDestination="@id/favouritesFragment2">
+
+    <fragment
+        android:id="@+id/favouritesFragment2"
+        android:name="com.zalocoders.dvtweatherapp.ui.favourites.list.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_favouritesFragment2_to_favouritesMapsFragment"
+            app:destination="@id/favouritesMapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesMapsFragment"
+        android:name="com.zalocoders.dvtweatherapp.ui.favourites.map.FavouritesMapsFragment"
+        android:label="fragment_favourites_maps"
+        tools:layout="@layout/fragment_favourites_maps" >
+        <action
+            android:id="@+id/action_favouritesMapsFragment_to_favouritesFragment2"
+            app:destination="@id/favouritesFragment2" />
+    </fragment>
+</navigation>

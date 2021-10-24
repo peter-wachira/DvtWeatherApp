@@ -1,4 +1,4 @@
-package com.zalocoders.dvtweatherapp.ui.favourites
+package com.zalocoders.dvtweatherapp.ui.favourites.list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

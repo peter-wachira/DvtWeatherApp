@@ -1,4 +1,4 @@
-package com.zalocoders.dvtweatherapp.ui.favourites
+package com.zalocoders.dvtweatherapp.ui.favourites.list
 
 import com.zalocoders.dvtweatherapp.data.Favourite
 import com.zalocoders.dvtweatherapp.db.FavouriteLocationDao

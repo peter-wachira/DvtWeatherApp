@@ -1,4 +1,4 @@
-package com.zalocoders.dvtweatherapp.ui.favourites
+package com.zalocoders.dvtweatherapp.ui.favourites.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.zalocoders.dvtweatherapp.databinding.FragmentFavouritesBinding
 import com.zalocoders.dvtweatherapp.utils.hide
 import com.zalocoders.dvtweatherapp.utils.show
@@ -30,6 +31,14 @@ class FavouritesFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		getAllFavouriteLocations()
+		initViews()
+	}
+	
+	private fun initViews() {
+		binding.viewMapBtn.setOnClickListener {
+			val action = FavouritesFragmentDirections.actionFavouritesFragment2ToFavouritesMapsFragment()
+			findNavController().navigate(action)
+		}
 	}
 	
 	private fun getAllFavouriteLocations() {
