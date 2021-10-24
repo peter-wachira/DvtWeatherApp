@@ -1,11 +1,13 @@
-# Weather Fore Cast
+# Weather App
 
 
 ## Pre Requisities
 - [A valid Open Weather API Key](https://openweathermap.org/appid)
+- [A valid Google maps Api]
 
 ## Setup
  - Paste your open weather API key to ``api_key`` on `strings.xml`
+ - Paste you Google Api key in local.properties.
  - Build the project
 
 * gets current weather forecast of a location and displays forecast over the next week.
@@ -61,6 +63,7 @@
 <img  width="200" height="400" src="./screenshort/11.png"/>
 </td>
 <tr>
+<td>
 <img  width="200" height="400" src="./screenshort/12.png"/>
 </td>
 <td>
