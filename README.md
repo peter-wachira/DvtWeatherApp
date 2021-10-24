@@ -58,16 +58,11 @@
 <img  width="200" height="400" src="./screenshort/3.png"/>
 </td>
 <td>
-<img  width="200" height="400" src="./screenshort/12.png"/>
-</td>
-<td>
 <img  width="200" height="400" src="./screenshort/11.png"/>
 </td>
-<tr>
 <td>
-<img  width="200" height="400" src="./screenshort/6.png"/>
+<img  width="200" height="400" src="./screenshort/12.png"/>
 </td>
-</tr>
 </table>
 
 
