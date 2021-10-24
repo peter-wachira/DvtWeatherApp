@@ -18,6 +18,6 @@
     <fragment
         android:id="@+id/favouritesMapsFragment"
         android:name="com.zalocoders.dvtweatherapp.ui.favourites.map.FavouritesMapsFragment"
-        android:label="Map"
+        android:label="Favourites Locations Map"
         tools:layout="@layout/fragment_favourites_maps" />
 </navigation>

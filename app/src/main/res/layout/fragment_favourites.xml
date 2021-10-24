@@ -8,19 +8,6 @@
     android:background="@color/white"
     tools:context=".ui.favourites.list.FavouritesFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/TextAppearance.MaterialComponents.Headline5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="18dp"
-        android:fontFamily="@font/work_sans"
-        android:text="@string/favourite_location"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/view_map_Btn"
         android:layout_width="match_parent"
@@ -67,19 +54,17 @@
 
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favourite_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
-        android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/view_map_Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
