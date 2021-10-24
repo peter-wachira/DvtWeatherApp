@@ -15,4 +15,5 @@ class FavouriteLocationViewModel @Inject constructor(
 	
 	fun getAllFavourites() = favouriteRepository.getAllFavouriteLocations()
 	
+	fun getMostCurrentCurrentWeather() = favouriteRepository.getMostCurrentCurrentWeather()
 }

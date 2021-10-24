@@ -3,7 +3,9 @@ package com.zalocoders.dvtweatherapp.ui.favourites
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.zalocoders.dvtweatherapp.databinding.ActivityFavouritesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavouritesActivity : AppCompatActivity() {
 	
 	private val binding:ActivityFavouritesBinding by lazy{

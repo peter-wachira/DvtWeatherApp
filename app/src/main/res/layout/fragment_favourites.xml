@@ -23,15 +23,19 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/view_map_Btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:text="view in Map"
+        android:textAllCaps="false"
+        app:cornerRadius="24dp"
+        android:textColor="@color/white"
         app:icon="@drawable/map_icon"
-        app:iconTint="@color/cloudy"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/cloudy"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:iconGravity="textStart"
+        app:iconTint="@color/white"
+        android:layout_margin="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/error_layout"
@@ -69,9 +73,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton"
+        app:layout_constraintBottom_toTopOf="@+id/view_map_Btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:itemCount="15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

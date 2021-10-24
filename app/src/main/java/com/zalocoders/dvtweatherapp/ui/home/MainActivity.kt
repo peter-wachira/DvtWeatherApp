@@ -49,8 +49,12 @@ import com.zalocoders.dvtweatherapp.db.mappers.toFavouriteLocationEntity
 import com.zalocoders.dvtweatherapp.ui.favourites.FavouritesActivity
 import com.zalocoders.dvtweatherapp.ui.favourites.list.FavouritesFragment
 import com.zalocoders.dvtweatherapp.utils.NetworkUtils
+import com.zalocoders.dvtweatherapp.utils.hide
 import com.zalocoders.dvtweatherapp.utils.isLocationPermissionEnabled
 import com.zalocoders.dvtweatherapp.utils.isUserLocationEnabled
+import com.zalocoders.dvtweatherapp.utils.show
+import com.zalocoders.dvtweatherapp.utils.showRetrySnackBar
+import com.zalocoders.dvtweatherapp.utils.showSnackbar
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint

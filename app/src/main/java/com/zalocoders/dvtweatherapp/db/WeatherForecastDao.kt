@@ -14,6 +14,9 @@ interface WeatherForecastDao {
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun insertCurrentLocationWeather(currentWeather: CurrentWeather)
 	
+	@Query("SELECT * FROM current_weather ORDER by lastUpdated ASC LIMIT 1")
+	fun getMostCurrentCurrentWeather():Flow<CurrentWeather>
+	
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun insertForeCast(foreCast: ForeCast)
 	

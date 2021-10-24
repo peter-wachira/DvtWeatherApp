@@ -1,16 +1,16 @@
 package com.zalocoders.dvtweatherapp.ui.favourites.map
 
-import com.zalocoders.dvtweatherapp.data.Favourite
 import com.zalocoders.dvtweatherapp.db.FavouriteLocationDao
+import com.zalocoders.dvtweatherapp.db.WeatherForecastDao
 import javax.inject.Inject
 
 class FavouriteLocationRepository @Inject constructor(
-		private val favouriteLocationDao: FavouriteLocationDao
+		private val favouriteLocationDao: FavouriteLocationDao,
+		private val weatherForecastDao: WeatherForecastDao
 ) {
 	
 	fun getAllFavouriteLocations() = favouriteLocationDao.getAllFavouriteLocation()
 	
-	suspend fun deleteFavouriteLocation(favourite: Favourite) =
-			favouriteLocationDao.deleteFavouriteLocation(favourite)
+	fun getMostCurrentCurrentWeather() = weatherForecastDao.getCurrentWeather()
 	
 }
