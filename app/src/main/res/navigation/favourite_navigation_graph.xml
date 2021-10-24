@@ -8,19 +8,16 @@
     <fragment
         android:id="@+id/favouritesFragment2"
         android:name="com.zalocoders.dvtweatherapp.ui.favourites.list.FavouritesFragment"
-        android:label="fragment_favourites"
+        android:label="Favourite Locations"
         tools:layout="@layout/fragment_favourites" >
         <action
             android:id="@+id/action_favouritesFragment2_to_favouritesMapsFragment"
             app:destination="@id/favouritesMapsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/favouritesMapsFragment"
         android:name="com.zalocoders.dvtweatherapp.ui.favourites.map.FavouritesMapsFragment"
-        android:label="fragment_favourites_maps"
-        tools:layout="@layout/fragment_favourites_maps" >
-        <action
-            android:id="@+id/action_favouritesMapsFragment_to_favouritesFragment2"
-            app:destination="@id/favouritesFragment2" />
-    </fragment>
+        android:label="Map"
+        tools:layout="@layout/fragment_favourites_maps" />
 </navigation>
