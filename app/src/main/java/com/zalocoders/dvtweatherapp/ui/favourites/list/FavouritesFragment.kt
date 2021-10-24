@@ -50,6 +50,7 @@ class FavouritesFragment : Fragment() {
 					binding.errorLayout.hide()
 				} else {
 					binding.errorLayout.show()
+					binding.viewMapBtn.hide()
 				}
 				
 				with(binding.favouriteRecycler) {
