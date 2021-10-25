@@ -34,6 +34,14 @@
     * [MockK](https://github.com/mockk) - mocking library for Kotlin
     * [Truth](https://github.com/google/truth) - Truth makes your test assertions and failure messages more readable.
 
+<table>
+<tr>
+<td>
+<img  width="200" height="400" src="./screenshort/tests.png"/>
+</td>
+</tr>
+</table>
+
     * Plugins
         * [Detekt](https://github.com/detekt/detekt) - a static code analysis tool for the Kotlin programming language.
 
