@@ -36,6 +36,3 @@ jobs:
 
       - name: Run detekt
         run: ./gradlew detekt --stacktrace
-
-      - name: Run Unit Tests
-        run: ./gradlew test --stacktrace
