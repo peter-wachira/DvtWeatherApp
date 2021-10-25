@@ -45,10 +45,8 @@ class HomeRepositoryTest:BaseTest() {
 	fun `test inserting current weather into database`() {
 		runBlocking {
 			homeRepository.insertCurrentLocationWeather(SampleRequest.sampleCurrentWeather)
-			
-			val location = homeRepository.getAllForeCasts().first().toList()[0]
-			
-			MatcherAssert.assertThat(location.locationName, `is`(SampleRequest.sampleCurrentWeather.name))
+			val location = homeRepository.getLocalCurrentWeather().first()
+			MatcherAssert.assertThat(location.weatherConditionName, `is`(SampleRequest.sampleCurrentWeather.weatherConditionName))
 		}
 	}
 }

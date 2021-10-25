@@ -1,5 +1,6 @@
 package com.zalocoders.dvtweatherapp.ui.favourites.map
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.zalocoders.dvtweatherapp.BaseTest
 import com.zalocoders.dvtweatherapp.data.SampleRequest
 import com.zalocoders.dvtweatherapp.ui.home.HomeRepository
@@ -9,7 +10,9 @@ import org.hamcrest.MatcherAssert
 import org.hamcrest.core.Is.`is`
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class FavouriteLocationRepositoryTest:BaseTest(){
 	
 	private lateinit var favouriteLocationRepository: FavouriteLocationRepository
