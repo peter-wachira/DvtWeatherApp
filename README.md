@@ -40,6 +40,10 @@
 <img  width="800" height="400" src="./screenshort/tests.png"/>
 </td>
 </tr>
+<td>
+<img  width="800" height="400" src="./screenshort/tests2.png"/>
+</td>
+</tr>
 </table>
 
     * Plugins
