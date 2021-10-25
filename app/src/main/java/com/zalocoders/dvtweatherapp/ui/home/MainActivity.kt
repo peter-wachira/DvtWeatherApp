@@ -14,6 +14,7 @@ import android.provider.Settings
 import android.view.Window
 import android.view.WindowManager
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,11 +84,9 @@ class MainActivity : AppCompatActivity() {
 				Timber.e(lastLocation.latitude.toString())
 				cancel()
 				if (NetworkUtils.isOnline(this@MainActivity)) {
-					Timber.e("Online")
 					getCurrentWeather(lastLocation)
 					getForecast(lastLocation)
 				} else {
-					Timber.e("Offline")
 					getLocalCurrentWeather()
 					getLocalWeatherForecast()
 				}
@@ -308,7 +307,7 @@ class MainActivity : AppCompatActivity() {
 		when {
 			currentWeather.weatherConditionName.contains("rain", true) -> {
 				binding.apply {
-					rootLayout.setBackgroundColor(resources.getColor(R.color.rainy))
+					rootLayout.setBackgroundColor(ContextCompat.getColor(this@MainActivity,R.color.rainy))
 					currentWeatherLayout.setBackgroundResource(R.drawable.sea_rainy)
 				}
 				val bitMap: Bitmap = getBitmapResource(R.drawable.sea_rainy)
@@ -316,7 +315,7 @@ class MainActivity : AppCompatActivity() {
 			}
 			currentWeather.weatherConditionName.contains("sun", true) -> {
 				binding.apply {
-					rootLayout.setBackgroundColor(resources.getColor(R.color.sunny))
+					rootLayout.setBackgroundColor(ContextCompat.getColor(this@MainActivity,R.color.sunny))
 					currentWeatherLayout.setBackgroundResource(R.drawable.sea_sunnypng)
 				}
 				val bitMap: Bitmap = getBitmapResource(R.drawable.sea_sunnypng)
@@ -324,7 +323,7 @@ class MainActivity : AppCompatActivity() {
 			}
 			currentWeather.weatherConditionName.contains("clear", true) -> {
 				binding.apply {
-					rootLayout.setBackgroundColor(resources.getColor(R.color.sunny))
+					rootLayout.setBackgroundColor(ContextCompat.getColor(this@MainActivity,R.color.sunny))
 					currentWeatherLayout.setBackgroundResource(R.drawable.sea_sunnypng)
 				}
 				val bitMap: Bitmap = getBitmapResource(R.drawable.sea_sunnypng)
@@ -332,7 +331,7 @@ class MainActivity : AppCompatActivity() {
 			}
 			currentWeather.weatherConditionName.contains("clouds", true) -> {
 				binding.apply {
-					rootLayout.setBackgroundColor(resources.getColor(R.color.cloudy))
+					rootLayout.setBackgroundColor(ContextCompat.getColor(this@MainActivity,R.color.cloudy))
 					currentWeatherLayout.setBackgroundResource(R.drawable.sea_cloudy)
 				}
 				val bitMap: Bitmap = getBitmapResource(R.drawable.sea_cloudy)
