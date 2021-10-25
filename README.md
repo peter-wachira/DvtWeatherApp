@@ -37,7 +37,7 @@
 <table>
 <tr>
 <td>
-<img  width="200" height="400" src="./screenshort/tests.png"/>
+<img  width="800" height="400" src="./screenshort/tests.png"/>
 </td>
 </tr>
 </table>
