@@ -36,7 +36,7 @@ class HomeViewModel @Inject constructor(
 	
 	fun getCurrentWeather(location: Location) = flow {
 		_isLoading.value = true
-		emit(homeRepository.getLocalCurrentWeather(location))
+		emit(homeRepository.getCurrentWeather(location))
 		_isLoading.value = false
 	}
 	
@@ -67,7 +67,8 @@ class HomeViewModel @Inject constructor(
 			}
 	
 	fun getAllForeCasts() = homeRepository.getAllForeCasts()
-	fun getCurrentWeather() = homeRepository.getLocalCurrentWeather()
+	
+	fun getLocalCurrentWeather() = homeRepository.getLocalCurrentWeather()
 	
 	@ExperimentalCoroutinesApi
 	@SuppressLint("MissingPermission")

@@ -34,7 +34,6 @@ open class BaseTest {
 	open lateinit var favouriteDao: FavouriteLocationDao
 	
 	
-	
 	@Before
 	open fun setup() {
 		val context = ApplicationProvider.getApplicationContext<Context>()
@@ -73,7 +72,6 @@ open class BaseTest {
 				.addConverterFactory(MoshiConverterFactory.create(moshi))
 				.build()
 				.create(ApiService::class.java)
-		
 	}
 	
 	@After

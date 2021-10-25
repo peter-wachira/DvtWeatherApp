@@ -18,7 +18,7 @@ class HomeRepository @Inject constructor(
 		@NetworkModule.ApiKey private val apiKey: String,
 ) {
 	
-	suspend fun getLocalCurrentWeather(location: Location) = safeApiCall {
+	suspend fun getCurrentWeather(location: Location) = safeApiCall {
 		apiService.getCurrentWeatherByLocation(
 				location.latitude.toString(),
 				location.longitude.toString(),

@@ -21,7 +21,7 @@ import com.zalocoders.dvtweatherapp.databinding.FragmentFavouritesMapsBinding
 import com.zalocoders.dvtweatherapp.utils.getWeatherIcon
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import timber.log.Timber
+
 
 @AndroidEntryPoint
 class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
@@ -70,7 +70,6 @@ class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
 				favouritesMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,5F))
 			}
 		}
-		
 	}
 	
 	private fun addLocationsToMap(){
@@ -99,7 +98,6 @@ class FavouritesMapsFragment : Fragment(),OnMapReadyCallback {
 							}
 						}
 						favouritesMap.addMarker(markerOptions)
-						
 					}
 				}
 			}

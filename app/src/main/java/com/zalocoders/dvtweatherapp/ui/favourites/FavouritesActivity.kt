@@ -6,7 +6,6 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.zalocoders.dvtweatherapp.R
 import com.zalocoders.dvtweatherapp.databinding.ActivityFavouritesBinding

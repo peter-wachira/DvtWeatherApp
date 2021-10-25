@@ -5,8 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.location.Address
-import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
 import android.os.Build
@@ -16,7 +14,6 @@ import android.provider.Settings
 import android.view.Window
 import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,15 +37,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
-import java.io.IOException
 import java.util.*
 import kotlin.system.exitProcess
 import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
 import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.dvtweatherapp.db.mappers.toFavouriteLocationEntity
 import com.zalocoders.dvtweatherapp.ui.favourites.FavouritesActivity
-import com.zalocoders.dvtweatherapp.ui.favourites.list.FavouritesFragment
 import com.zalocoders.dvtweatherapp.utils.NetworkUtils
+import com.zalocoders.dvtweatherapp.utils.geoCodeLocation
 import com.zalocoders.dvtweatherapp.utils.hide
 import com.zalocoders.dvtweatherapp.utils.isLocationPermissionEnabled
 import com.zalocoders.dvtweatherapp.utils.isUserLocationEnabled
@@ -71,19 +67,14 @@ class MainActivity : AppCompatActivity() {
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 		
-		checkForLocationPermission()
-		observeViewModel()
-		addToFavourite()
-		initViews()
-	}
-	
-	
-	private fun initViews() {
 		binding.favouriteLocationsFab.setOnClickListener {
 			startActivity(Intent(this,FavouritesActivity::class.java))
 		}
+		
+		checkForLocationPermission()
+		observeViewModel()
+		addToFavourite()
 	}
-	
 	
 	private fun getUserCurrentLocation() {
 		lifecycleScope.launchWhenStarted {
@@ -123,25 +114,12 @@ class MainActivity : AppCompatActivity() {
 								}
 							}
 						}
-						
-					
 					}
 					is WeatherResult.InternalError -> {
 						getLocalWeatherForecast()
 					}
 				}
 			}
-		}
-	}
-	
-	private fun geoCodeLocation(lat: Double, lon: Double): String {
-		val geocoder = Geocoder(this, Locale.getDefault())
-		try {
-			val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
-			val address: Address = addresses[0]
-			return address.adminArea
-		} catch (e: Throwable) {
-			throw IOException(e)
 		}
 	}
 	
@@ -210,7 +188,7 @@ class MainActivity : AppCompatActivity() {
 	
 	private fun getLocalCurrentWeather() {
 		lifecycleScope.launchWhenStarted {
-			viewModel.getCurrentWeather().collect { currentWeather ->
+			viewModel.getLocalCurrentWeather().collect { currentWeather ->
 				setBackGroundImage(currentWeather)
 				setUpCurrentWeatherViews(currentWeather)
 				currentLocationWeather = currentWeather
@@ -283,7 +261,6 @@ class MainActivity : AppCompatActivity() {
 		weatherForeCastAdapter.submitList(result)
 	}
 	
-	
 	private fun getBitmapResource(drawable: Int): Bitmap {
 		return BitmapFactory.decodeResource(
 				resources,
@@ -325,15 +302,6 @@ class MainActivity : AppCompatActivity() {
 						}
 					}
 				}
-	}
-	
-	
-	override fun onBackPressed() {
-		if (supportFragmentManager.backStackEntryCount > 0) {
-			supportFragmentManager.popBackStack()
-		} else {
-			super.onBackPressed()
-		}
 	}
 	
 	private fun setBackGroundImage(currentWeather: CurrentWeather) {

@@ -1,7 +1,6 @@
 package com.zalocoders.dvtweatherapp.ui.home
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.zalocoders.dvtweatherapp.data.SampleResponses
 import com.google.common.truth.Truth
 import com.zalocoders.dvtweatherapp.BaseTest
 import com.zalocoders.dvtweatherapp.data.SampleRequest
@@ -28,7 +27,7 @@ class HomeRepositoryTest:BaseTest() {
 	@Test
 	fun `test getting forecast from remote`() {
 		runBlocking {
-			val response = homeRepository.getForecast(location = SampleResponses.testLocation)
+			val response = homeRepository.getForecast(location = SampleRequest.testLocation)
 			
 			Truth.assertThat(response is WeatherResult.Success)
 		}
@@ -37,7 +36,7 @@ class HomeRepositoryTest:BaseTest() {
 	@Test
 	fun `test getting current weather from remote`() {
 		runBlocking {
-			val response = homeRepository.getLocalCurrentWeather(location = SampleResponses.testLocation)
+			val response = homeRepository.getCurrentWeather(location = SampleRequest.testLocation)
 			Truth.assertThat(response is WeatherResult.Success)
 		}
 	}

@@ -14,7 +14,7 @@ class RequestDispatcher : Dispatcher() {
 			request.path!!.contains("weather", true) -> {
 				MockResponse()
 						.setResponseCode(HttpURLConnection.HTTP_OK)
-						.setBody(getJson("json/weatherresponse.json"))
+						.setBody(getJson("json/weather_response.json"))
 			}
 			request.path!!.contains("onecall", true) -> {
 				MockResponse()
